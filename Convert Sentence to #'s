@@ -1,0 +1,6 @@
+def alphabet_position(text):
+    new_list = []
+    for char in text.lower():
+        if char.isalpha():
+            new_list.append(str(ord(char) - 96))
+    return ' '.join(new_list)
