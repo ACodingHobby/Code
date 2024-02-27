@@ -1,0 +1,29 @@
+def minesweeper(matrix):
+    row = len(matrix)
+    col = len(matrix[0])
+
+    m_output = [[0 for _ in range(col)] for _ in range(row)]
+
+    directions = [(-1, -1), (-1, 0), (-1, 1),
+                  (0, -1),           (0, 1),
+                  (1, -1), (1, 0), (1, 1)]
+
+    for i in range(row):
+        for j in range(col):
+
+            for dx, dy in directions:
+                ni, nj = i + dx, j + dy
+
+                if 0 <= ni < row and 0 <= nj < col:
+                    if matrix[ni][nj]:
+                        m_output[i][j] += 1
+
+matrix = [[True, False, False],
+            [False, True, False],
+            [False, False, False]]
+
+
+
+
+result = minesweeper(matrix)
+print(result)
