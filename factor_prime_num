@@ -1,0 +1,28 @@
+def find_max_prime_factor(num):
+    factors = []
+    for i in range(num - 1, 0, -1):
+        if num % i == 0:
+            if i != 1:
+                factors.append(i)
+            else:
+                break
+
+    if len(factors) != 0:
+        max_factor = max(factors)
+        print(max_factor, num / max_factor)
+        return max_factor
+    else:
+        print("done")
+        return None
+
+def factorize_large_number(num):
+    current_num = num
+    while True:
+        max_factor = find_max_prime_factor(current_num)
+        if max_factor is not None:
+            current_num = max_factor
+        else:
+            break
+
+num = 512
+factorize_large_number(num)
