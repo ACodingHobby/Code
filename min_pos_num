@@ -1,0 +1,17 @@
+def solve(arr):
+    arr.sort()
+    result = 1
+
+    for num in arr:
+        if num <= result:
+            result += num
+        else:
+            break
+
+    return result
+
+
+arr = [1,2,3,8,7]
+print(solve(arr))
+
+
