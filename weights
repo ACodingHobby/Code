@@ -1,0 +1,10 @@
+def balance(left, right):
+    dict = {'!': 2, '?': 3}
+
+    left_total = sum(dict[char] for char in left if char in dict)
+    right_total = sum(dict[char] for char in right if char in dict)
+
+    return left_total, right_total
+left = "!!d!"
+right = "!?"
+print(balance(left, right))
