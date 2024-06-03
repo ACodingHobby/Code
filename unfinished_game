@@ -1,0 +1,111 @@
+import pygame
+import time
+import threading
+
+# Initialize pygame
+pygame.mixer.init()
+
+def play_music(file_path):
+    pygame.mixer.music.load(file_path)
+    pygame.mixer.music.play(-1)  # -1 makes the music loop indefinitely
+
+def stop_music():
+    pygame.mixer.music.stop()
+
+def background_music(file_path):
+    while True:
+        play_music(file_path)
+        time.sleep(pygame.mixer.Sound(file_path).get_length())
+
+
+def enter_name():
+    global mc_name
+    # Start background music in a separate thread
+    music_file_path = r"C:\Users\tommy\Downloads\scary-and-creepy-cinematic-background-143156.mp3"
+    music_thread = threading.Thread(target=background_music, args=(music_file_path,), daemon=True)
+    music_thread.start()
+
+    print("\nWelcome to...")
+    time.sleep(2)
+    print("Escape the Mansion I")
+    time.sleep(2)
+    mc_name = input("Please enter your name to start: ")
+    print(f"\nWelcome, {mc_name}!")
+
+def called():
+    global mc_name
+    print(f"\nYou decide to call the phone number on the paper.")
+    time.sleep(3)
+    print(f"The phone rings as you wait for an answer")
+    music_file_path = r"C:\Users\tommy\Downloads\with-draco-on-the-phone-141414.mp3"
+    music_thread = threading.Thread(target=background_music, args=(music_file_path,), daemon=True)
+    music_thread.start()
+    time.sleep(7)
+    music_file_path = r"C:\Users\tommy\Downloads\scary-and-creepy-cinematic-background-143156.mp3"
+    music_thread = threading.Thread(target=background_music, args=(music_file_path,), daemon=True)
+    music_thread.start()
+    print("\nSomeone picks up")
+    time.sleep(5)
+    print("'Hello?' you say cautiously. 'I'm interested in applying for the job.'")
+    time.sleep(5)
+    print("Nothing but silence.")
+    time.sleep(3)
+    print("You are about to hang up when suddenly someone speaks. It's a low rough voice, and gives you the creeps")
+    time.sleep(4)
+    print("6:00 A.M sharp tomorrow morning. The pay is $90 an hour. 133 N. Arving St.")
+    time.sleep(1)
+    print("He immediately hangs up")
+    time.sleep(5)
+    take_or_leave = input("That was odd. I've never experienced something like that. Should I take the job or leave it?")
+
+def start_game():
+    global mc_name
+    music_file_path = r"C:\Users\tommy\Downloads\just-relax-11157.mp3"
+    music_thread = threading.Thread(target=background_music, args=(music_file_path,), daemon=True)
+    music_thread.start()
+    print(f"\nYou are looking for a job over the summer. \nYou find a cool poster that"
+          f" mentions work at a mansion! \nThe pay was good, and you might be able"
+          f" to make some connections!")
+    time.sleep(4)
+    print(f"\nThough, you find one thing odd. The only contact information given was a phone number..."
+          f" no face, name or address")
+    time.sleep(3)
+    call = input("Do you decide to (call) the number before you start? "
+                 "Or do you (not) and introduce yourself in person? ")
+    time.sleep(2)
+    if call == "call":
+        called()
+
+
+
+
+
+if __name__ == "__main__":
+    enter_name()
+    start_game()
+
+
+
+
+
+
+    # # Play initial background music
+    # play_music(r"C:\Users\tommy\Downloads\scary-and-creepy-cinematic-background-143156.mp3")
+    #
+    # # Simulating different parts of the game
+    # print("You enter a dark forest...")
+    # pygame.time.wait(5000)  # Wait for 5 seconds (simulate gameplay)
+    #
+    # print("Something moves in the shadows...")
+    # play_music(r"C:\Users\tommy\Downloads\scarier-music.mp3")  # Play scarier music
+    # pygame.time.wait(5000)  # Wait for 5 seconds (simulate gameplay)
+    #
+    # print("The danger passes, and you find a clearing.")
+    # play_music(r"C:\Users\tommy\Downloads\less-scary-music.mp3")  # Play less scary music
+    # pygame.time.wait(5000)  # Wait for 5 seconds (simulate gameplay)
+    #
+    # # print("Game over.")
+    # stop_music()
+
+if __name__ == "__main__":
+    start_game()
