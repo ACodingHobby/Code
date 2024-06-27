@@ -1,0 +1,34 @@
+import random
+
+random_list = ["Flower", "pot", "omma", "tommy", "fish", "chips", "wordle", "happy"]
+random_word = random.choice(random_list)
+
+
+def display(secret_word, correct_guesses):
+    display = " "
+    for char in secret_word:
+        if char in correct_guesses:
+            display += char + " "
+        else:
+            display += "_ "
+    return display.strip()
+
+
+def hangman():
+    secret_word = random_word
+    guesses = 6
+    correct_guesses = set()
+    while guesses > 0:
+        print(display(secret_word, correct_guesses))
+        guess = input("Enter a char: ")
+        if guess in secret_word:
+            correct_guesses.add(guess)
+            if all(char in correct_guesses for char in secret_word):
+                print('You won')
+                break
+        else:
+            guesses -= 1
+            print(f"You are incorrect and failed and have only {guesses} left")
+
+
+hangman()
