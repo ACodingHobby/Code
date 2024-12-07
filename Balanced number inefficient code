@@ -1,0 +1,47 @@
+def balanced_num(number):
+    odd = False
+
+    if len(str(number)) % 2 == 0:
+        odd = False
+    else:
+        odd = True
+
+    if odd:
+        number_list = []
+        for i in str(number):
+            number_list.append(i)
+        length = (len(str(number)) -1) // 2
+        odd_middle_num = number_list[length]
+        first_part = number_list[:length]
+        second_part = number_list[length+1:]
+        for i in range(len(first_part)):
+            first_part[i] = int(first_part[i])
+            second_part[i] = int(second_part[i])
+
+        if sum(first_part) == sum(second_part):
+            return "Balanced"
+        else:
+            return "Not Balanced"
+    elif not odd:
+        number_list = []
+        for i in str(number):
+            number_list.append(i)
+        length = ((len(str(number))) // 2) - 1
+        # odd_middle_num = number_list[length], number_list[length+1]
+        first_part = number_list[:length]
+        second_part = number_list[length + 2:]
+        for i in range(len(first_part)):
+            first_part[i] = int(first_part[i])
+            second_part[i] = int(second_part[i])
+        if sum(first_part) == sum(second_part):
+            return "Balanced"
+        else:
+            return "Not Balanced"
+
+
+number = 2232
+print(balanced_num(number))
+
+
+
+
