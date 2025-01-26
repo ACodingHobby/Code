@@ -1,0 +1,152 @@
+import random
+import sys
+
+def welcome():
+    print("Welcome to BlackJack!")
+    name = input("Enter your name: ")
+    if type(name) != str or len(name) <= 2:
+        while type(name) != str() or len(name) <= 2:
+            name = input("Enter a real name: ")
+            if type(name) == str or len(name) > 2:
+                break
+
+def random_():
+    cards = {
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
+        "six": 6,
+        "seven": 7,
+        "eight": 8,
+        "nine": 9,
+        "ten": 10,
+        "jack": 10,
+        "queen": 10,
+        "king": 10,
+        "ace": 11
+    }
+    return random.choice(list(cards.values()))
+
+def h_s():
+
+    hit_stand = input("Do you want to hit or stand? ")
+    if hit_stand.lower() in ["hit", "stand"]:
+        return hit_stand
+    else:
+        while hit_stand.lower() not in ["hit", "stand"]:
+            hit_stand = input("Do you want to hit or stand? ")
+            if hit_stand.lower() in ["hit", "stand"]:
+                break
+        return hit_stand
+
+def game_start():
+    comp_cards = [random_(), random_()]
+    comp_choice = random.choice([0, 1])
+    player_cards = [random_(), random_()]
+
+    if sum(comp_cards) and sum(player_cards) == 21:
+        print("You both hit blackjack! Tie!")
+        sys.exit()
+    elif sum(comp_cards) == 21:
+        print("Computer hit blackjack! You lost!")
+        sys.exit()
+    elif sum(player_cards) == 21:
+        print("You hit blackjack! You won!")
+        sys.exit()
+
+    print(f"You have the cards {player_cards}. Your total is {sum(player_cards)}")
+
+    hit_or_stand = h_s()
+
+    # Comp stand, player stand
+    # Comp hit, player stand
+    if hit_or_stand.lower() == "stand" and comp_choice == 0:
+        print("Comp decided to stand")
+        if sum(player_cards) > sum(comp_cards):
+            print(f"You Won! Comp had cards {comp_cards}")
+            sys.exit()
+        elif sum(player_cards) < sum(comp_cards):
+            print(f"You lost! Comp had cards {comp_cards}!")
+            sys.exit()
+        else:
+            print(f"You tied! Comp had cards {comp_cards}")
+            sys.exit()
+    if hit_or_stand.lower() == "stand" and comp_choice == 1:
+        print("Comp decided to hit")
+        comp_cards.append(random_())
+        if sum(comp_cards) > 21:
+            print(f"Computer had the cards {comp_cards} and busted! You win!")
+            sys.exit()
+        elif sum(comp_cards) == 21:
+            print(f"Computer hit jackpot with {comp_cards}. You lost!")
+            sys.exit()
+        if sum(player_cards) > sum(comp_cards):
+            print(f"You Won! Comp had cards {comp_cards}")
+            sys.exit()
+        elif sum(player_cards) < sum(comp_cards):
+            print(f"You lost! Comp had cards {comp_cards}!")
+            sys.exit()
+        else:
+            print(f"You tied! Comp had cards {comp_cards}")
+            sys.exit()
+
+    # Comp stand, player hit
+    # Comp hit, player hit
+    if hit_or_stand.lower() == "hit" and comp_choice == 0:
+        print("Comp decided to stand")
+        add = random_()
+        player_cards.append(add)
+        print(f"You got the card {add}, with a total of {sum(player_cards)}")
+        if sum(player_cards) > 21:
+            print(f"You bust! Computer had cards {comp_cards}")
+            sys.exit()
+        elif sum(player_cards) == 21:
+            print(f"You hit blackjack! Comp had cards {comp_cards}")
+            sys.exit()
+        if sum(player_cards) > sum(comp_cards):
+            print(f"You Won! Comp had cards {comp_cards}")
+            sys.exit()
+        elif sum(player_cards) < sum(comp_cards):
+            print(f"You lost! Comp had cards {comp_cards}!")
+            sys.exit()
+        else:
+            print(f"You tied! Comp had cards {comp_cards}")
+            sys.exit()
+
+    if hit_or_stand.lower() == "hit" and comp_choice == 1:
+        print("Comp decided to hit as well")
+        comp_cards.append(random_())
+        adds = random_()
+        player_cards.append(adds)
+        print(f"Your total sum of cards is now {sum(player_cards)}")
+
+        if sum(comp_cards) > 21 and sum(player_cards) > 21:
+            print(f"You busted! But the computer had the cards {comp_cards}, total of {sum(comp_cards)}, and also busted! Tie!")
+            sys.exit()
+        elif sum(comp_cards) > 21 > sum(player_cards):
+            print(f"Computer busted with a total of {sum(comp_cards)} ({comp_cards})! You won!")
+            sys.exit()
+        elif sum(player_cards) > 21 > sum(comp_cards):
+            print(f"You busted! Computer had {comp_cards}.")
+            sys.exit()
+        elif sum(comp_cards) == 21 and sum(player_cards) == 21:
+            print(f"Computer hit blackjack with {comp_cards}. You hit blackjack as well! Tie!")
+            sys.exit()
+        if sum(player_cards) > sum(comp_cards):
+            print(f"You Won! Comp had cards {comp_cards}")
+            sys.exit()
+        elif sum(player_cards) < sum(comp_cards):
+            print(f"You lost! Comp had cards {comp_cards}!")
+            sys.exit()
+        else:
+            print(f"You tied! Comp had cards {comp_cards}")
+            sys.exit()
+
+
+
+
+
+
+welcome()
+game_start()
